@@ -6,9 +6,9 @@ namespace CodeFristServer
 {
     public class GreeterService : IGreeter
     {
-        public ValueTask<HelloReply> SayHelloAsync(HelloRequest value, CallContext context = default)
+        public Task<HelloReply> SayHelloAsync(HelloRequest value, CallContext context = default)
         {
-            return ValueTask.FromResult<HelloReply>(new() { Message = "Hello from Code First" });
+            return Task.FromResult<HelloReply>(new() { Message = "Hello from Code First" });
         }
     }
 }

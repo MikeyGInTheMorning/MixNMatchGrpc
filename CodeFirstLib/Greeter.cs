@@ -25,6 +25,6 @@ namespace CodeFirstLib
     [ServiceContract(Name = @"greet.Greeter")]
     public partial interface IGreeter
     {
-        ValueTask<HelloReply> SayHelloAsync(HelloRequest value, CallContext context = default);
+        Task<HelloReply> SayHelloAsync(HelloRequest value, CallContext context = default);
     }
 }
