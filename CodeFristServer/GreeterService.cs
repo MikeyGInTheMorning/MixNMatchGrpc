@@ -1,13 +1,14 @@
 ﻿using CodeFirstLib;
+using ProtoBuf.Grpc;
 using System.Threading.Tasks;
 
 namespace CodeFristServer
 {
-    public class GreeterService : Greeter
+    public class GreeterService : IGreeter
     {
-        public Task<HelloReply> SayHelloAsync(HelloRequest req)
+        public ValueTask<HelloReply> SayHelloAsync(HelloRequest value, CallContext context = default)
         {
-            return Task.FromResult<HelloReply>(new() { Message = "Hello from Code First" });
+            return ValueTask.FromResult<HelloReply>(new() { Message = "Hello from Code First" });
         }
     }
 }

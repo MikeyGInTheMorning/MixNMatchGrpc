@@ -1,4 +1,5 @@
 ﻿using ProtoBuf;
+using ProtoBuf.Grpc;
 using System;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -6,24 +7,24 @@ using System.Threading.Tasks;
 
 namespace CodeFirstLib
 {
-    [ServiceContract]
-    public interface Greeter
+    [ProtoContract()]
+    public partial class HelloRequest
     {
-        [OperationContract]
-        Task<HelloReply> SayHelloAsync(HelloRequest req);
+        [ProtoMember(1, Name = @"name")]
+        public string Name { get; set; } = "";
     }
 
-    [ProtoContract]
-    public class HelloRequest
+    [ProtoContract()]
+    public partial class HelloReply
     {
-        [ProtoMember(1)]
-        public string Name { get; set; }
+        [ProtoMember(1, Name = @"message")]
+        public string Message { get; set; } = "";
+
     }
 
-    [ProtoContract]
-    public class HelloReply
+    [ServiceContract(Name = @"greet.Greeter")]
+    public partial interface IGreeter
     {
-        [ProtoMember(1)]
-        public string Message { get; set; }
+        ValueTask<HelloReply> SayHelloAsync(HelloRequest value, CallContext context = default);
     }
 }

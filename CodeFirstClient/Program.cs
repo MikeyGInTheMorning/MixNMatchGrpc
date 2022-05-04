@@ -10,7 +10,7 @@ namespace CodeFirstClient
         static void Main(string[] args)
         {
             using var channel = GrpcChannel.ForAddress("https://localhost:5001");
-            var client = channel.CreateGrpcService<Greeter>();
+            var client = channel.CreateGrpcService<IGreeter>();
 
             var reply = client.SayHelloAsync(new()).Result;
 
